@@ -1,0 +1,29 @@
+[
+   {
+      "name": "Sam",
+      "email": "samemail",
+      "password": "sam@1234",
+      "courses": "rest assured",
+      "gender": "male",
+      "state": "Karnataka",
+      "hobbies": "Reading"
+   },
+   {
+      "name": "Alex",
+      "email": "alexemail",
+      "password": "alex@1234",
+      "courses": "appium",
+      "gender": "male",
+      "state": "Karnataka",
+      "hobbies": "Reading"
+   },
+   {
+      "name": "carlos",
+      "email": "carlosemail",
+      "password": "carlos@1234",
+      "courses": "appium",
+      "gender": "male",
+      "state": "Karnataka",
+      "hobbies": "Reading"
+   }
+]

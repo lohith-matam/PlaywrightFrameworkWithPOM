@@ -1,0 +1,208 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: client-app/purchase-product.spec.js >> purchase product
+- Location: tests/client-app/purchase-product.spec.js:6:1
+
+# Error details
+
+```
+ReferenceError: page is not defined
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - navigation [ref=e5]:
+    - generic [ref=e7]:
+      - link "Automation Automation Practice":
+        - /url: ""
+        - generic [ref=e8] [cursor=pointer]:
+          - heading "Automation" [level=3] [ref=e9]
+          - paragraph [ref=e10]: Automation Practice
+    - text: 
+    - link "🎯 I'll help you prepare for your next QA job — Explore the QA Career Accelerator." [ref=e11] [cursor=pointer]:
+      - /url: https://rahulshettyacademy.com/qa-career-accelerator-job-ready
+    - list [ref=e12]:
+      - listitem [ref=e13] [cursor=pointer]:
+        - button " HOME" [ref=e14]:
+          - generic [ref=e15]: 
+          - text: HOME
+      - listitem
+      - listitem [ref=e16] [cursor=pointer]:
+        - button " ORDERS" [ref=e17]:
+          - generic [ref=e18]: 
+          - text: ORDERS
+      - listitem [ref=e19] [cursor=pointer]:
+        - button " Cart 1" [ref=e20]:
+          - generic [ref=e21]: 
+          - text: Cart
+          - generic [ref=e22]: "1"
+      - listitem [ref=e23] [cursor=pointer]:
+        - button "Sign Out" [ref=e24]:
+          - generic [aria-hidden] [ref=e25]: 
+          - text: Sign Out
+  - generic [ref=e28]:
+    - generic [ref=e32]:
+      - generic [ref=e33]: ZARA COAT 3
+      - generic [ref=e34]: $ 11500
+      - generic [ref=e35]: "Quantity: 1"
+      - list [ref=e37]:
+        - listitem [ref=e38]: Apple phone
+    - generic [ref=e41]:
+      - generic [ref=e42]: Payment Method
+      - generic [ref=e43]:
+        - generic [ref=e44] [cursor=pointer]: Credit Card
+        - generic [ref=e45] [cursor=pointer]: Paypal
+        - generic [ref=e46] [cursor=pointer]: SEPA
+        - generic [ref=e47] [cursor=pointer]: Invoice
+      - generic [ref=e48]:
+        - generic [ref=e49]:
+          - generic [ref=e50]: Personal Information
+          - generic [ref=e52]:
+            - generic [ref=e54]:
+              - generic [ref=e55]: Credit Card Number
+              - textbox [ref=e56]: 4542 9931 9292 2293
+            - generic [ref=e57]:
+              - generic [ref=e58]:
+                - generic [ref=e59]: Expiry Date
+                - combobox [ref=e60]:
+                  - option "01"
+                  - option "02"
+                  - option "03"
+                  - option "04"
+                  - option "05"
+                  - option "06"
+                  - option "07"
+                  - option "08"
+                  - option "09"
+                  - option "10"
+                  - option "11" [selected]
+                  - option "12"
+                - combobox [ref=e61]:
+                  - option "01"
+                  - option "02"
+                  - option "03"
+                  - option "04"
+                  - option "05"
+                  - option "06"
+                  - option "07"
+                  - option "08"
+                  - option "09"
+                  - option "10"
+                  - option "11"
+                  - option "12"
+                  - option "13"
+                  - option "14"
+                  - option "15"
+                  - option "16"
+                  - option "17"
+                  - option "18"
+                  - option "19"
+                  - option "20"
+                  - option "21"
+                  - option "22"
+                  - option "23"
+                  - option "24"
+                  - option "25"
+                  - option "26"
+                  - option "27"
+                  - option "28"
+                  - option "29"
+                  - option "30"
+                  - option "31" [selected]
+              - generic [ref=e62]:
+                - generic [ref=e63]: CVV Code ?
+                - textbox [ref=e64]: "123"
+            - generic [ref=e66]:
+              - generic [ref=e67]: Name on Card
+              - textbox [ref=e68]: Testing567
+            - generic [ref=e69]:
+              - generic [ref=e70]:
+                - generic [ref=e71]: Apply Coupon
+                - textbox [ref=e72]
+              - button "Apply Coupon" [ref=e75] [cursor=pointer]
+        - generic [ref=e76]:
+          - generic [ref=e77]: Shipping Information
+          - generic [ref=e79]:
+            - generic [ref=e80]: Testing567@gmail.com
+            - textbox [ref=e81]: Testing567@gmail.com
+            - generic [ref=e83]:
+              - textbox "Select Country" [active] [ref=e84]: United
+              - generic [ref=e85]:
+                - button " Tanzania, United Republic of" [ref=e87] [cursor=pointer]:
+                  - generic [ref=e88]:
+                    - generic [ref=e89]: 
+                    - text: Tanzania, United Republic of
+                - button " United Arab Emirates" [ref=e90] [cursor=pointer]:
+                  - generic [ref=e91]:
+                    - generic [ref=e92]: 
+                    - text: United Arab Emirates
+                - button " United Kingdom" [ref=e93] [cursor=pointer]:
+                  - generic [ref=e94]:
+                    - generic [ref=e95]: 
+                    - text: United Kingdom
+                - button " United States" [ref=e96] [cursor=pointer]:
+                  - generic [ref=e97]:
+                    - generic [ref=e98]: 
+                    - text: United States
+                - button " United States Minor Outlying Islands" [ref=e99] [cursor=pointer]:
+                  - generic [ref=e100]:
+                    - generic [ref=e101]: 
+                    - text: United States Minor Outlying Islands
+            - generic [ref=e102]: Place Order
+```
+
+# Test source
+
+```ts
+  1  | import {expect} from '@playwright/test';
+  2  | class CheckOutPage
+  3  | {
+  4  |    constructor(page)
+  5  |    {
+  6  |       this.page = page;
+  7  |       this.checkoutdisplay = page.locator("div.payment__title");
+  8  |       this.option = page.locator("select.input.ddl");
+  9  |       this.carddetails = page.locator("input.input.txt");
+  10 |       this.country = page.getByPlaceholder("Select Country");
+  11 |       this.displayresults = page.locator(".ta-results");
+  12 |       this.orderbutton = page.locator("a.btnn.action__submit");
+  13 |       this.confirmorder = page.locator("h1.hero-primary");
+  14 |    }
+  15 | 
+  16 |    async placeOrder()
+  17 |    {
+  18 |       await expect(this.checkoutdisplay.nth(0)).toHaveText(" Payment Method ")
+  19 |       await this.option.first().selectOption('11');
+  20 |       await this.option.last().selectOption('31');
+  21 |       await this.carddetails.nth(1).fill("123");
+  22 |       await this.carddetails.nth(2).fill("Testing567");
+  23 |       await this.country.pressSequentially("United");
+  24 |       await this.displayresults.waitFor();
+  25 |       const scntry = "United States";
+> 26 |       const selcntry = page.locator(".ta-results button");
+     |                        ^ ReferenceError: page is not defined
+  27 |       const cntrycount = await selcntry.count();
+  28 |       for(let i=0;i<cntrycount;i++)
+  29 |       {
+  30 |          const cntrytext = await selcntry.nth(i).textContent();
+  31 |          if(cntrytext.trim()===scntry)
+  32 |          {
+  33 |             await selcntry.nth(i).click();
+  34 |             break;
+  35 |          }
+  36 |       }
+  37 |       await this.orderbutton.click();
+  38 |       await expect(this.confirmorder).toHaveText(" Thankyou for the order. ")
+  39 |    }
+  40 | }
+  41 | 
+  42 | module.exports = CheckOutPage;
+```

@@ -1,0 +1,199 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: client-app/purchase-product.spec.js >> purchase product
+- Location: tests/client-app/purchase-product.spec.js:5:1
+
+# Error details
+
+```
+Error: expect(locator).toHaveText(expected) failed
+
+Locator: locator('div.payment__title')
+Expected: " Payment Method "
+Error: strict mode violation: locator('div.payment__title') resolved to 3 elements:
+    1) <div _ngcontent-psw-c40="" class="payment__title"> Payment Method </div> aka getByText('Payment Method')
+    2) <div _ngcontent-psw-c40="" class="payment__title">…</div> aka getByText('Personal Information')
+    3) <div _ngcontent-psw-c40="" class="payment__title">…</div> aka getByText('Shipping Information')
+
+Call log:
+  - Expect "toHaveText" locator('div.payment__title') with timeout 5000ms
+  - waiting for locator('div.payment__title')
+
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - navigation [ref=e5]:
+    - generic [ref=e7]:
+      - link "Automation Automation Practice":
+        - /url: ""
+        - generic [ref=e8] [cursor=pointer]:
+          - heading "Automation" [level=3] [ref=e9]
+          - paragraph [ref=e10]: Automation Practice
+    - text: 
+    - link "🎯 I'll help you prepare for your next QA job — Explore the QA Career Accelerator." [ref=e11] [cursor=pointer]:
+      - /url: https://rahulshettyacademy.com/qa-career-accelerator-job-ready
+    - list [ref=e12]:
+      - listitem [ref=e13] [cursor=pointer]:
+        - button " HOME" [ref=e14]:
+          - generic [ref=e15]: 
+          - text: HOME
+      - listitem
+      - listitem [ref=e16] [cursor=pointer]:
+        - button " ORDERS" [ref=e17]:
+          - generic [ref=e18]: 
+          - text: ORDERS
+      - listitem [ref=e19] [cursor=pointer]:
+        - button " Cart 1" [ref=e20]:
+          - generic [ref=e21]: 
+          - text: Cart
+          - generic [ref=e22]: "1"
+      - listitem [ref=e23] [cursor=pointer]:
+        - button "Sign Out" [ref=e24]:
+          - generic [aria-hidden] [ref=e25]: 
+          - text: Sign Out
+  - generic [ref=e28]:
+    - generic [ref=e32]:
+      - generic [ref=e33]: ZARA COAT 3
+      - generic [ref=e34]: $ 11500
+      - generic [ref=e35]: "Quantity: 1"
+      - list [ref=e37]:
+        - listitem [ref=e38]: Apple phone
+    - generic [ref=e41]:
+      - generic [ref=e42]: Payment Method
+      - generic [ref=e43]:
+        - generic [ref=e44] [cursor=pointer]: Credit Card
+        - generic [ref=e45] [cursor=pointer]: Paypal
+        - generic [ref=e46] [cursor=pointer]: SEPA
+        - generic [ref=e47] [cursor=pointer]: Invoice
+      - generic [ref=e48]:
+        - generic [ref=e49]:
+          - generic [ref=e50]: Personal Information
+          - generic [ref=e52]:
+            - generic [ref=e54]:
+              - generic [ref=e55]: Credit Card Number
+              - textbox [ref=e56]: 4542 9931 9292 2293
+            - generic [ref=e57]:
+              - generic [ref=e58]:
+                - generic [ref=e59]: Expiry Date
+                - combobox [ref=e60]:
+                  - option "01" [selected]
+                  - option "02"
+                  - option "03"
+                  - option "04"
+                  - option "05"
+                  - option "06"
+                  - option "07"
+                  - option "08"
+                  - option "09"
+                  - option "10"
+                  - option "11"
+                  - option "12"
+                - combobox [ref=e61]:
+                  - option "01"
+                  - option "02"
+                  - option "03"
+                  - option "04"
+                  - option "05"
+                  - option "06"
+                  - option "07"
+                  - option "08"
+                  - option "09"
+                  - option "10"
+                  - option "11"
+                  - option "12"
+                  - option "13"
+                  - option "14"
+                  - option "15"
+                  - option "16" [selected]
+                  - option "17"
+                  - option "18"
+                  - option "19"
+                  - option "20"
+                  - option "21"
+                  - option "22"
+                  - option "23"
+                  - option "24"
+                  - option "25"
+                  - option "26"
+                  - option "27"
+                  - option "28"
+                  - option "29"
+                  - option "30"
+                  - option "31"
+              - generic [ref=e62]:
+                - generic [ref=e63]: CVV Code ?
+                - textbox [ref=e64]
+            - generic [ref=e66]:
+              - generic [ref=e67]: Name on Card
+              - textbox [ref=e68]
+            - generic [ref=e69]:
+              - generic [ref=e70]:
+                - generic [ref=e71]: Apply Coupon
+                - textbox [ref=e72]
+              - button "Apply Coupon" [ref=e75] [cursor=pointer]
+        - generic [ref=e76]:
+          - generic [ref=e77]: Shipping Information
+          - generic [ref=e79]:
+            - generic [ref=e80]: Testing567@gmail.com
+            - textbox [ref=e81]: Testing567@gmail.com
+            - textbox "Select Country" [ref=e84]
+            - generic [ref=e85]: Place Order
+```
+
+# Test source
+
+```ts
+  1  | import {test,expect} from '@playwright/test';
+  2  | import LoginPage from '../../pages/client-app/loginpage';
+  3  | import HomePage from '../../pages/client-app/homepage';
+  4  | import CartPage from '../../pages/client-app/cartpage';
+  5  | test('purchase product',async({page}) => {
+  6  | 
+  7  | const loginpage = new LoginPage(page);
+  8  | await loginpage.navigateToApplication();
+  9  | await loginpage.logintoApplication();
+  10 | await page.waitForLoadState("networkidle");
+  11 | const homepage = new HomePage(page);
+  12 | await homepage.addToCart();
+  13 | const cartpage = new CartPage(page);
+  14 | await cartpage.validateCartPage();
+  15 | await cartpage.purchaseItem();
+  16 | 
+> 17 | await expect(page.locator("div.payment__title")).toHaveText(" Payment Method ")
+     |                                                  ^ Error: expect(locator).toHaveText(expected) failed
+  18 | 
+  19 | // await page.locator("select.input.ddl").first().selectOption('11');
+  20 | // await page.locator("select.input.ddl").last().selectOption('31');
+  21 | 
+  22 | // await page.locator("input.input.txt").nth(1).fill("123");
+  23 | // await page.locator("input.input.txt").nth(2).fill("Testing567");
+  24 | // await page.getByPlaceholder("Select Country").pressSequentially("United");
+  25 | // await page.locator(".ta-results").waitFor();
+  26 | 
+  27 | // const scntry = "United States";
+  28 | // const selcntry = page.locator(".ta-results button");
+  29 | // const cntrycount = await selcntry.count();
+  30 | // for(let i=0;i<cntrycount;i++)
+  31 | // {
+  32 | //    const cntrytext = await selcntry.nth(i).textContent();
+  33 | //    if(cntrytext.trim()===scntry)
+  34 | //    {
+  35 | //       await selcntry.nth(i).click();
+  36 | //       break;
+  37 | //    }
+  38 | // }
+  39 | // await page.locator("a.btnn.action__submit").click();
+  40 | // await expect(page.locator("h1.hero-primary")).toHaveText(" Thankyou for the order. ")
+  41 | 
+  42 | await page.pause();
+  43 | })
+```
