@@ -2,7 +2,7 @@ import {test} from '@playwright/test';
 
 test('sample', async ({page}) => {
 
-await page.goto("https://eventhub.rahulshettyacademy.com/login");
+await page.goto("https://eventhub.rahulshettyacademy.com/sssss");
 
 
 })
