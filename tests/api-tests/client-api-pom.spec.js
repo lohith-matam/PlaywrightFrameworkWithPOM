@@ -1,10 +1,9 @@
 import {test,expect,request} from '@playwright/test';
 import APIPage from '../../pages/client-app/apipage';
-import ApiTestData from '../../utils/api-test-data';
+import apiTestData from '../../utils/api-test-data.json';
 
-const apiTestData = new ApiTestData();
-const loginData = apiTestData.getLoginData();
-const orderData = apiTestData.getOrderData();
+const loginData = apiTestData.loginData;
+const orderData = apiTestData.orderData;
 let token;
 let orderId;
 

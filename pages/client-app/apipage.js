@@ -16,6 +16,7 @@ class APIPage {
       expect(response.ok()).toBeTruthy();
       const responseJson = await response.json();
       const token = responseJson.token;
+      console.log(token);
       this.token = token;
       expect(token).toBeTruthy();
       return token;
@@ -36,6 +37,7 @@ class APIPage {
 
       expect(orderResponse.ok()).toBeTruthy();
       const orderResponseJson = await orderResponse.json();
+      console.log(orderResponseJson);
       const orderId = orderResponseJson.orders[0];
       expect(orderId).toBeTruthy();
       return orderId;
