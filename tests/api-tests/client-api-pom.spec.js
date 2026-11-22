@@ -10,13 +10,10 @@ test.beforeAll(async () => {
    const context = await request.newContext();
    const apiPage = new APIPage(context,loginData,orderData);
    token = await apiPage.getToken();
-   orderId = await apiPage.createOrder();
-   
+   orderId = await apiPage.createOrder(); 
 });
 
 test('place the order', async({page}) =>{
-
-
 await page.addInitScript(value => {window.localStorage.setItem('token',value)},token);
 await page.goto("https://rahulshettyacademy.com/client/#/auth/login");
 await page.locator('[routerlink="/dashboard/myorders"]').click();
