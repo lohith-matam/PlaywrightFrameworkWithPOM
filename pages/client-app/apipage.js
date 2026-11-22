@@ -17,19 +17,17 @@ class APIPage {
       const responseJson = await response.json();
       const token = responseJson.token;
       console.log(token);
-      this.token = token;
       expect(token).toBeTruthy();
       return token;
    }
 
-   async createOrder() {
-      await this.getToken();
+   async createOrder(token) {
       const orderResponse = await this.context.post(
          'https://rahulshettyacademy.com/api/ecom/order/create-order',
          {
             data: this.orderData,
             headers: {
-               Authorization: this.token,
+               Authorization: token,
                'Content-Type': 'application/json'
             }
          }

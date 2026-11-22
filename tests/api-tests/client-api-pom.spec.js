@@ -10,7 +10,7 @@ test.beforeAll(async () => {
    const context = await request.newContext();
    const apiPage = new APIPage(context,loginData,orderData);
    token = await apiPage.getToken();
-   orderId = await apiPage.createOrder(); 
+   orderId = await apiPage.createOrder(token);
 });
 
 test('place the order', async({page}) =>{
