@@ -1,7 +1,7 @@
 import {test,expect,request} from '@playwright/test';
 const fakePayLoadOrders = { data: [], message: "No Orders" };
 
-test('@QW Security test request intercept', async ({ page }) => {
+test('@QW Security test response intercept', async ({ page }) => {
 
    //login and reach orders page
    await page.goto("https://rahulshettyacademy.com/client");
